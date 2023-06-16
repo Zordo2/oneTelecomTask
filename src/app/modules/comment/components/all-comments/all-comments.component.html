@@ -1,0 +1,35 @@
+<button class="btn btn-dark" [routerLink]="['../control']">create comment</button>
+<hr />
+<table *ngIf="!loading" class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>name</th>
+      <th>body</th>
+      <th>update</th>
+      <th>del</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comment of comments">
+      <td>{{ comment.id }}</td>
+      <td>{{ comment.name.slice(0, 30) }} ...</td>
+      <td>{{ comment.body.slice(0, 80) }} ...</td>
+      <td>
+        <button class="btn btn-primary">
+          <a [routerLink]="['../control']" [queryParams]="{ id: comment.id }"
+            >update</a
+          >
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger">
+          <a (click)="onDeleteComment(comment.id)">delete</a>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span *ngIf="loading">
+  <i class="fas fa-spinner fa-spin fs-5 fw-bolder text-center d-flex justify-content-center"></i>
+</span>

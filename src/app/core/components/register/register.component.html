@@ -1,0 +1,27 @@
+
+<h1 class="py-2">Register</h1>
+<div class="mx-auto w-75">
+    <form [formGroup]="registerForm" class="text-white">
+      <label for="email">email:</label>
+      <input type="email" class="form-control mb-2" formControlName="email">
+      <div *ngIf="registerForm.get('email')?.errors&&registerForm.get('email')?.touched">
+        <p *ngIf="registerForm.get('email')?.getError('required')" class="alert alert-danger py-1">email is required</p>
+        <p *ngIf="registerForm.get('email')?.getError('email')" class="alert alert-danger py-1">invalid email</p>
+      </div>
+       <label for="password">password:</label>
+      <input type="password" class="form-control mb-2" formControlName="password">
+      <div *ngIf="registerForm.get('password')?.errors&&registerForm.get('password')?.touched">
+        <p *ngIf="registerForm.get('password')?.getError('required')" class="alert alert-danger py-1">password is required</p>
+        <p *ngIf="registerForm.get('password')?.getError('pattern')" class="alert alert-danger py-1"> password must start with capital letter and from 3 to 8 small letters</p>
+      </div>
+      <button [disabled]="registerForm.invalid" class="btn btn-info">
+        <span *ngIf="isLoading">
+          <i class="fas fa-spinner fa-spin"></i>
+        </span>
+        <span *ngIf="!isLoading" (click)="registerWithEmailAndPassword()">Register</span>
+      </button>
+
+    </form>
+
+  </div>
+
